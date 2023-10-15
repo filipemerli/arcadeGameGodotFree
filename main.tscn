@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxsomm2s0j8bb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_gsnth"]
+[ext_resource type="PackedScene" uid="uid://bl0qbe02pm8cd" path="res://target.tscn" id="2_flf88"]
+[ext_resource type="Texture2D" uid="uid://boxdn5rxs2jg5" path="res://assets/background.png" id="2_mpqbg"]
+[ext_resource type="PackedScene" uid="uid://3441ns0335t8" path="res://count_down.tscn" id="4_dinjs"]
+[ext_resource type="Texture2D" uid="uid://d2y0nxumak2b3" path="res://icon.svg" id="5_cjboo"]
+[ext_resource type="Texture2D" uid="uid://ybs6wbi6po1b" path="res://assets/icon_play.png" id="6_oe6xy"]
+[ext_resource type="Texture2D" uid="uid://cq7tmcbcu8ej5" path="res://assets/icon_restart.png" id="7_0ls1g"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_gsnth")
+
+[node name="BG" type="TextureRect" parent="."]
+offset_right = 650.0
+offset_bottom = 1024.0
+texture = ExtResource("2_mpqbg")
+
+[node name="Target3" parent="." instance=ExtResource("2_flf88")]
+position = Vector2(142, 352)
+scale = Vector2(0.8, 0.8)
+
+[node name="Target5" parent="." instance=ExtResource("2_flf88")]
+position = Vector2(150, 742)
+scale = Vector2(0.8, 0.8)
+
+[node name="Target2" parent="." instance=ExtResource("2_flf88")]
+position = Vector2(313, 546)
+scale = Vector2(0.8, 0.8)
+
+[node name="Target4" parent="." instance=ExtResource("2_flf88")]
+position = Vector2(507, 354)
+scale = Vector2(0.8, 0.8)
+
+[node name="Target" parent="." instance=ExtResource("2_flf88")]
+position = Vector2(525, 655)
+scale = Vector2(0.8, 0.8)
+
+[node name="CountDown" parent="." instance=ExtResource("4_dinjs")]
+position = Vector2(10, 148)
+
+[node name="Menu" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="blackBG" type="TextureRect" parent="Menu"]
+self_modulate = Color(0.0705882, 0, 0, 0.882353)
+custom_minimum_size = Vector2(550, 750)
+offset_left = 52.0
+offset_top = 136.0
+offset_right = 602.0
+offset_bottom = 886.0
+texture = ExtResource("5_cjboo")
+
+[node name="play" type="TextureButton" parent="Menu"]
+custom_minimum_size = Vector2(75, 75)
+offset_left = 293.0
+offset_top = 451.0
+offset_right = 368.0
+offset_bottom = 530.0
+texture_normal = ExtResource("6_oe6xy")
+texture_pressed = ExtResource("6_oe6xy")
+texture_hover = ExtResource("6_oe6xy")
+stretch_mode = 4
+
+[node name="restart" type="TextureButton" parent="Menu"]
+visible = false
+custom_minimum_size = Vector2(75, 75)
+offset_left = 281.0
+offset_top = 446.0
+offset_right = 373.0
+offset_bottom = 530.0
+texture_normal = ExtResource("7_0ls1g")
+texture_pressed = ExtResource("7_0ls1g")
+texture_hover = ExtResource("7_0ls1g")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Menu"]
+offset_left = 76.0
+offset_top = 544.0
+offset_right = 586.0
+offset_bottom = 650.0
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 60
+text = "Play"
+horizontal_alignment = 1
+
+[node name="points" type="Label" parent="Menu"]
+visible = false
+offset_left = 84.0
+offset_top = 194.0
+offset_right = 548.0
+offset_bottom = 316.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 60
+text = "wdsdasdasd"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gameOver" from="CountDown" to="." method="_on_count_down_game_over"]
+[connection signal="pressed" from="Menu/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/restart" to="." method="_on_restart_pressed"]

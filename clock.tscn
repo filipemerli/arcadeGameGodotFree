@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi5wl4mqrxntj"]
+
+[ext_resource type="Texture2D" uid="uid://hjdqhxm2vae5" path="res://assets/icon_time.png" id="1_cv7t3"]
+
+[node name="Clock" type="Sprite2D"]
+texture = ExtResource("1_cv7t3")

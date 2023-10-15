@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://bl0qbe02pm8cd"]
+
+[ext_resource type="Texture2D" uid="uid://hxr1bwrb1t2g" path="res://assets/sprites.png" id="1_l4p3f"]
+[ext_resource type="Script" path="res://target.gd" id="1_xv4js"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hfy33"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0oeb"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(190, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm4dn"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(380, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23y88"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(0, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxxn5"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(380, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihrsa"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(190, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1abob"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(570, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfdeg"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(760, 0, 190, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf2p8"]
+atlas = ExtResource("1_l4p3f")
+region = Rect2(950, 0, 190, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l6kq0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0oeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm4dn")
+}],
+"loop": false,
+"name": &"appear",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23y88")
+}],
+"loop": false,
+"name": &"hidden",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxxn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihrsa")
+}],
+"loop": false,
+"name": &"hide",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1abob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfdeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf2p8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="Target" type="StaticBody2D"]
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_hfy33")
+script = ExtResource("1_xv4js")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l6kq0")
+animation = &"appear"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(12, -53, 20, -46, 36, -25, 42, 8, 43, 16, 43, 16, 49, 35, 43, 45, 14, 50, -18, 52, -39, 43, -49, 32, -46, 12, -38, -22, -28, -39, -9, -53)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
